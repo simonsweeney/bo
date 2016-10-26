@@ -1,0 +1,233 @@
+@import 'modules/math';
+
+body{
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    font-family: 'Helvetica';
+}
+
+h1{
+    font-size: 300px;
+}
+
+.space{
+    position: fixed;
+    background-image: url('http://www.gunnars.com/wp-content/uploads/2014/08/Space.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.thing{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 100% 100%;
+}
+
+.camera{
+    position: fixed;
+    transform-origin: 0 0;
+}
+
+.world{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    transform: scale(1, .5) rotate(45deg);
+    //transform: translate3d( sqrt(2) * 50%, 0, 0) rotateX($map-rotation) rotateZ(45deg);
+    
+}
+
+.thing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center center;
+}
+
+.region{
+    background-color: white;
+    overflow: hidden;
+}
+
+.ellipse{
+    border-radius: 50%;
+}
+
+.character{
+    
+    $character-width: 2.5em;
+    $character-height: 2.5em;
+    
+    width: $character-width;
+    height: $character-height;
+    background: coral;
+    position: absolute;
+    margin: -$character-height 0 0 (-$character-width/2);
+    z-index: 20;
+    border-radius: 50%;
+    
+}
+
+.button-1 {
+    
+    background: red;
+    transition: background-color 1s;
+    
+    &.button_active{
+        background-color: yellow;
+    }
+    
+}
+
+.spinner {
+    
+    div{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        
+    }
+    
+    &.line div {
+        width: 100%;
+        height: 10%;
+        transform: translate(-50%, -50%);
+        transform-origin: 50% 50%;
+        //transition: transform .25s;
+    }
+    
+    &.circle div {
+        width: 20%;
+        height: 20%;
+        border-radius: 50%;
+        left: 80%;
+        transform-origin: -150% 50%;
+    }
+}
+
+.song {
+    
+    &__inner {
+        border-radius: 50%;
+        border: 1px solid red;
+        width: 100%;
+        height: 100%;
+        
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0%;
+            height: 0%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 100%;
+            background-color: coral;
+            
+            @keyframes grow {
+                0%{ width: 0; height: 0; }
+                100%{ width: 100%; height: 100%; }
+            }
+            
+        }
+    }
+    
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    &__title{
+        font-size: 32px;
+        position: absolute;
+        color: red;
+        transform-origin: 0 0;
+        transform: translateY(-50%);
+        text-align: center;
+        width: 100%;
+        top: 50%;
+    }
+    
+    &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: scale(0);
+        transition: transform 5s ease-in, color .5s;
+        background: red;
+        border-radius: 50%;
+        
+    }
+    
+    &_active {
+        .song__inner:before {
+    
+            animation: grow 2.9s ease-in-out 1;
+   
+        }
+    }
+    
+    &_loaded:before {
+        //transform: none;
+    }
+    
+    &_playing {
+    
+        .song__inner {
+            background-color: red;
+
+            @keyframes beat {
+                0%{ transform: none }
+                50% { transform: scale(1.1) }
+                100%{ transform: none }
+            }
+            
+            &:before {
+                animation: none;
+            }
+            
+            animation: beat 1.25s ease-in-out infinite;
+            
+        }
+        
+        .song__title {
+            color: coral;
+            // animation: spin 1.25s ease-in-out infinite;
+
+        }
+        
+    }
+    
+}
+
+.sprite {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+
+.tour {
+    .text {
+        &_active {
+            color: red;
+        }
+    }
+}

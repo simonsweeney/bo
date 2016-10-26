@@ -1,0 +1,43 @@
+{
+  "name": "bong-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "browserify-shader": "^0.1.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-file-include": "^0.14.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "mz": "^2.4.0",
+    "sharp": "^0.16.2",
+    "stringify": "^5.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "xmldom": "^0.1.22"
+  },
+  "dependencies": {
+    "detectcss": "^1.0.2",
+    "dom-parser": "^0.1.5",
+    "eases": "^1.0.8",
+    "events": "^1.1.1",
+    "gl-matrix-mat2d": "^2.2.1-npm",
+    "jquery": "^3.1.0",
+    "promise": "^7.1.1",
+    "three": "^0.81.2",
+    "transformation-matrix-js": "^2.6.5",
+    "twodee": "^0.2.1",
+    "underscore": "^1.8.3",
+    "victor": "^1.1.0"
+  }
+}

@@ -1,0 +1,18 @@
+body{
+    width: 5000px;
+    height: 5000px;
+    overflow: scroll;
+}
+
+.world{
+    width: 2500px;
+    height: 2500px;
+    transform: none;
+}
+
+.region{
+    width: 500px;
+    height: 500px;
+    position: relative;
+    float: left;
+}

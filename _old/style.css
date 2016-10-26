@@ -1,0 +1,169 @@
+body {
+  background: black;
+  margin: 0;
+  font-family: Helvetica;
+  background-size: cover;
+  background-image: url("http://www.gunnars.com/wp-content/uploads/2014/08/Space.jpg"); }
+
+.camera {
+  position: fixed;
+  width: 14142.13562px;
+  height: 7071.06781px;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0; }
+
+.map {
+  position: absolute;
+  background: white;
+  width: 10000px;
+  height: 10000px;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: translate3d(70.71068%, 0, 0) rotateX(60deg) rotateZ(45deg);
+          transform: translate3d(70.71068%, 0, 0) rotateX(60deg) rotateZ(45deg); }
+  .map svg {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
+  .map_simple {
+    width: 3333.33333px;
+    height: 3333.33333px; }
+    .map_simple .things {
+      display: none; }
+
+.things {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10000px;
+  width: 10000px;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0; }
+
+.character {
+  width: 1em;
+  height: 2.5em;
+  background: coral;
+  position: absolute;
+  margin: -2.5em 0 0 -0.5em;
+  z-index: 20; }
+  .character:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    -webkit-transform: rotateX(60deg) rotateZ(45deg) scaleY(1.5);
+            transform: rotateX(60deg) rotateZ(45deg) scaleY(1.5);
+    -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+    z-index: 15; }
+
+.ping {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; }
+  .ping:after {
+    content: '';
+    position: absolute;
+    margin: -1em 0 0 -1em;
+    width: 2em;
+    height: 2em;
+    border: 1px solid teal;
+    -webkit-animation: ping 1s ease-out;
+            animation: ping 1s ease-out;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards; }
+
+@-webkit-keyframes ping {
+  from {
+    -webkit-transform: scale(0.1);
+            transform: scale(0.1); }
+  to {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); } }
+
+@keyframes ping {
+  from {
+    -webkit-transform: scale(0.1);
+            transform: scale(0.1); }
+  to {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); } }
+
+.zoom-out {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  width: 2em;
+  height: 2em;
+  background: blue; }
+
+.lights {
+  position: absolute;
+  width: 100px;
+  top: 50%;
+  left: 50%; }
+  .lights .thing {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1em;
+    -webkit-transition: background .5s, -webkit-transform .5s;
+    transition: background .5s, -webkit-transform .5s;
+    transition: background .5s, transform .5s;
+    transition: background .5s, transform .5s, -webkit-transform .5s;
+    border-radius: 50%; }
+    .lights .thing_visited {
+      background: yellow; }
+    .lights .thing_active {
+      -webkit-transition: background .1s;
+      transition: background .1s;
+      background: white;
+      -webkit-transform: scale(1.5);
+              transform: scale(1.5); }
+
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1000px;
+  margin: 0; }
+  h1 .thing {
+    display: inline-block;
+    -webkit-transition: color 1s;
+    transition: color 1s; }
+    h1 .thing_visited {
+      color: blue; }
+
+.fog {
+  position: absolute;
+  background: #16161d;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s; }
+  .fog.thing_visited {
+    opacity: 0; }
+
+.tour {
+  font-size: 250px;
+  position: absolute;
+  display: block;
+  top: 60%;
+  left: 50%;
+  list-style: none; }
+  .tour .thing {
+    -webkit-transition: all .1s;
+    transition: all .1s; }
+    .tour .thing_visited {
+      color: #F8F0EA; }
+    .tour .thing_active {
+      color: transparent;
+      -webkit-text-stroke-width: 5px;
+      -webkit-text-stroke-color: black;
+      -webkit-transform: scale(1.01, 1.01);
+              transform: scale(1.01, 1.01); }

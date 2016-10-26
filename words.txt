@@ -1,0 +1,30 @@
+CHARACTER
+
+    Simple/geometric
+    Multiple?
+    Pippin
+
+INTERACTIONS
+    
+    Touch once
+    Touch on/off
+    Push/move
+    Danger
+    Impassable
+    Moving when music is on
+    Surfaces that you leave trails on
+    
+SOUND
+    
+    Music (started in world, then in player)
+    Objects trigger sound effect
+    Places make ambient sound, louder <=> closer (eg space)
+    
+MECHANICS
+
+    Unseen areas have fog
+    Zoom out to overview - can fast travel to visited areas
+    
+    
+    
+

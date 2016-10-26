@@ -1,0 +1,208 @@
+
+
+
+body{
+    background: black;
+    margin: 0;
+    font-family: Helvetica;
+    background-size: cover;
+    background-image: url('http://www.gunnars.com/wp-content/uploads/2014/08/Space.jpg');
+}
+
+$map-size: 10000px;
+$map-rotation: 60deg;
+$map-diagonal: sqrt( $map-size * $map-size * 2 );
+
+.camera{
+    position: fixed;
+    width: $map-diagonal + px;
+    height: $map-diagonal / 2 + px;
+    transform-origin: 0 0;
+}
+
+.map{
+    position: absolute;
+    background: white;
+    width: $map-size;
+    height: $map-size;
+    transform-origin: 0 0;
+    transform: translate3d( sqrt(2) * 50%, 0, 0) rotateX($map-rotation) rotateZ(45deg);
+    
+    svg{
+        width: 100%;
+        height: 100%;
+        transform: translate3d(0,0,0);
+    }
+    
+    &_simple {
+        
+        width: $map-size / 3;
+        height: $map-size / 3;
+        
+        .things{
+            display: none;
+        }
+        
+    }
+    
+}
+
+.things{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $map-size;
+    width: $map-size;
+    transform-origin: 0 0;
+}
+
+.character{
+    
+    $character-width: 1em;
+    $character-height: 2.5em;
+    
+    width: $character-width;
+    height: $character-height;
+    background: coral;
+    position: absolute;
+    margin: -$character-height 0 0 (-$character-width/2);
+    z-index: 20;
+
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        transform: rotateX($map-rotation) rotateZ(45deg) scaleY(1.5);
+        transform-origin: 50% 100%;
+        z-index: 15;
+    }
+}
+
+.ping{
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    &:after {
+        content: '';
+        position: absolute;
+        margin: -1em 0 0 -1em;
+        width: 2em;
+        height: 2em;
+        border: 1px solid teal;
+        animation: ping 1s ease-out;
+        animation-fill-mode: forwards;
+    }
+    
+}
+
+@keyframes ping {
+    from{
+        transform: scale(0.1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+.zoom-out{
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    background: blue;
+}
+
+.lights {
+    
+    position: absolute;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+
+    .thing {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1em;
+        transition: background .5s, transform .5s;
+        border-radius: 50%;
+        &_visited {
+            background: yellow;
+        }
+        &_active{
+            transition: background .1s;
+            background: white;
+            transform: scale(1.5);
+        }
+    }
+    
+}
+
+h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    //transform: translate(-50%, -50%);
+    font-size: 1000px;
+    margin: 0;
+    
+    .thing {
+        
+        display: inline-block;
+        transition: color 1s;
+        
+        &_visited {
+            
+            color: blue;
+            
+        }
+        
+    }
+}
+
+.fog{
+    
+    position: absolute;
+    background: #16161d;
+    transition: opacity 2s;
+    
+    &.thing_visited {
+        
+        opacity: 0;
+        
+    }
+    
+}
+
+.tour{
+    
+    font-size: 250px;
+    position: absolute;
+    display: block;
+    top: 60%;
+    left: 50%;
+    list-style: none;
+    
+    .thing {
+        transition: all .1s;
+
+        &_visited {
+            color: #F8F0EA;
+            
+        }
+        &_active{
+            color: rgba(0,0,0,0);
+            -webkit-text-stroke-width: 5px;
+            -webkit-text-stroke-color: black;
+            transform: scale(1.01, 1.01);
+
+        }     
+    }
+    
+}

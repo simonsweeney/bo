@@ -1,0 +1,210 @@
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: 'Helvetica'; }
+
+h1 {
+  font-size: 300px; }
+
+.space {
+  position: fixed;
+  background-image: url("http://www.gunnars.com/wp-content/uploads/2014/08/Space.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0; }
+
+.thing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: 100% 100%; }
+
+.camera {
+  position: fixed;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0; }
+
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: scale(1, 0.5) rotate(45deg);
+          transform: scale(1, 0.5) rotate(45deg); }
+
+.thing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center; }
+
+.region {
+  background-color: white;
+  overflow: hidden; }
+
+.ellipse {
+  border-radius: 50%; }
+
+.character {
+  width: 2.5em;
+  height: 2.5em;
+  background: coral;
+  position: absolute;
+  margin: -2.5em 0 0 -1.25em;
+  z-index: 20;
+  border-radius: 50%; }
+
+.button-1 {
+  background: red;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s; }
+  .button-1.button_active {
+    background-color: yellow; }
+
+.spinner div {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
+.spinner.line div {
+  width: 100%;
+  height: 10%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%; }
+
+.spinner.circle div {
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  left: 80%;
+  -webkit-transform-origin: -150% 50%;
+          transform-origin: -150% 50%; }
+
+.song__inner {
+  border-radius: 50%;
+  border: 1px solid red;
+  width: 100%;
+  height: 100%; }
+  .song__inner:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0%;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    border-radius: 100%;
+    background-color: coral; }
+
+@-webkit-keyframes grow {
+  0% {
+    width: 0;
+    height: 0; }
+  100% {
+    width: 100%;
+    height: 100%; } }
+
+@keyframes grow {
+  0% {
+    width: 0;
+    height: 0; }
+  100% {
+    width: 100%;
+    height: 100%; } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+.song__title {
+  font-size: 32px;
+  position: absolute;
+  color: red;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  text-align: center;
+  width: 100%;
+  top: 50%; }
+
+.song:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: color .5s, -webkit-transform 5s ease-in;
+  transition: color .5s, -webkit-transform 5s ease-in;
+  transition: transform 5s ease-in, color .5s;
+  transition: transform 5s ease-in, color .5s, -webkit-transform 5s ease-in;
+  background: red;
+  border-radius: 50%; }
+
+.song_active .song__inner:before {
+  -webkit-animation: grow 2.9s ease-in-out 1;
+          animation: grow 2.9s ease-in-out 1; }
+
+.song_playing .song__inner {
+  background-color: red;
+  -webkit-animation: beat 1.25s ease-in-out infinite;
+          animation: beat 1.25s ease-in-out infinite; }
+
+@-webkit-keyframes beat {
+  0% {
+    -webkit-transform: none;
+            transform: none; }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1); }
+  100% {
+    -webkit-transform: none;
+            transform: none; } }
+
+@keyframes beat {
+  0% {
+    -webkit-transform: none;
+            transform: none; }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1); }
+  100% {
+    -webkit-transform: none;
+            transform: none; } }
+  .song_playing .song__inner:before {
+    -webkit-animation: none;
+            animation: none; }
+
+.song_playing .song__title {
+  color: coral; }
+
+.sprite {
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.tour .text_active {
+  color: red; }
