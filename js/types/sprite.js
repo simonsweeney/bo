@@ -9,7 +9,7 @@ module.exports = class Sprite extends Thing {
         this.isSprite = true;
         this.spriteElement = this.createSpriteElement( attrs );
         this.setSpriteStyle( attrs );
-        context.spritesElement.appendChild( this.spriteElement );
+        context.spriteElement.appendChild( this.spriteElement );
         
         this.positionNeedsUpdate = true;
         
@@ -52,6 +52,18 @@ module.exports = class Sprite extends Thing {
         super.setPosition(...arguments);
         
         this.positionNeedsUpdate = true;
+        
+    }
+    
+    hide () {
+        
+        this.spriteElement.style.display = 'none';
+        
+    }
+    
+    show () {
+        
+        this.spriteElement.style.display = 'block';
         
     }
     

@@ -1,41 +1,33 @@
-var Sprite = require('./things/base/sprite.js');
-var tween = require('./lib/tween');
-var { PREFIXED_TRANSFORM } = require('./lib/utils.js');
+var Sprite = require('./types/sprite.js');
+var tween = require('./lib/tween.js');
 
 module.exports = class Character extends Sprite {
     
-    constructor(){
+    constructor ( element ) {
         
-        super({
-            type: 'character',
-            x: 10000,
-            y: 0
-        })
+        var attrs = {
+            x: 0,
+            y: 0,
+            width: 50,
+            height: 100,
+            color: 'coral'
+        }
+        
+        super( attrs, { spriteElement: element } );
         
     }
     
-    moveTo( v, world ){
-        
-        this.position.copy( v );
-        this.element.style[ PREFIXED_TRANSFORM ] = this.getTranslate();
-        this.emit('move', this);
-    }
+    getName() { return 'character' }
     
     walkTo ( to ) {
         
         var from = this.position.clone();
-        var distance = from.clone().subtract(to).length();
+        var distance = from.clone().sub(to).length();
         var duration = Math.abs( distance * 1 );
         
         return tween( 'characterWalk', 0, 1, duration, x => {
-            return this.moveTo( from.clone().mix( to, x ) );
+            return this.setPosition( from.clone().lerp( to, x ) );
         });
-        
-    }
-    
-    stop() {
-        
-        tween.stop('characterWalk');
         
     }
     

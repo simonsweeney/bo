@@ -5,43 +5,47 @@ var rAF = require('./lib/rAF.js');
 
 var Camera = require('./camera.js');
 var World = require('./world.js');
+var Character = require('./character.js');
 
 var data = require('./world.json');
 
-var camera = new Camera( document.querySelector('.camera') )
+var cameraElement = document.querySelector('.camera');
+var worldElement = document.querySelector('.world');
+var spriteElement = document.querySelector('.sprites');
+
+var character = new Character( spriteElement );
+var camera = new Camera( cameraElement );
 
 var context = {
-    worldElement: document.querySelector('.world'),
-    spritesElement: document.querySelector('.sprites'),
+    worldElement,
+    spriteElement,
+    character,
     camera
 }
 
 var world = new World( data, context );
 
-var character = world.find( 'character' )[0];
+world.children.push(character);
+
+camera.setBounds( world.box );
 
 var Vector2 = require('./vendor/vector2.js');
+var winSize = new Vector2();
 
 window.addEventListener('click', e => {
     
     var mouse = new Vector2( e.clientX, e.clientY );
     
-    character.setPosition( camera.screenToWorld( mouse ) );
-    
-})
+    character.walkTo( camera.screenToWorld( mouse ) );
+
+});
 
 $(window).on('mousewheel', e => {
     
-    camera.zoomBy( e.deltaY * e.deltaFactor * .0001 );
+    camera.zoomBy( -e.deltaY * e.deltaFactor * .0001 );
     
 })
 
-rAF.start( (now, dT) => {
-    
-    camera.setCenter( camera.center.clone().lerp( camera.worldToView( character.position ), .1 ) );
-    
-    camera.render(world);
-    
-})
+camera.follow( character );
 
-camera.render( world );
+rAF.start( now => camera.update( world ) );

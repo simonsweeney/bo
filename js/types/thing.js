@@ -1,5 +1,6 @@
 var EventEmitter = require('events');
 var Vector2 = require('../vendor/vector2.js');
+var Box2 = require('../vendor/box2.js');
 var { extend } = require('underscore');
 var { PREFIXED_TRANSFORM } = require('../lib/utils.js');
 
@@ -13,6 +14,8 @@ module.exports = class Thing extends EventEmitter {
 
         this.position = new Vector2( attrs.x, attrs.y );
         this.size = new Vector2( attrs.width, attrs.height );
+        this.box = new Box2();
+        this.setBox();
         
         this.children = [];
         this.element = this.createElement( attrs );
@@ -21,6 +24,7 @@ module.exports = class Thing extends EventEmitter {
             
             this.setStyle( attrs );
             this.positionNeedsUpdate = true;
+            this.hide();
             context.worldElement.appendChild( this.element );
             
         }
@@ -57,12 +61,23 @@ module.exports = class Thing extends EventEmitter {
         
         this.position.copy( v );
         
+        this.setBox();
+        
         if( this.element ) this.positionNeedsUpdate = true;
         
     }
     
+    setBox() {
+        
+        this.box.min = this.position.clone();
+        this.box.max = this.box.min.clone().add(this.size);
+        
+    }
+    
     getTransform() {
+        
         return `translate(${this.position.x}px, ${this.position.y}px)`;
+        
     }
     
     addChildren ( children ) {
@@ -102,39 +117,16 @@ module.exports = class Thing extends EventEmitter {
         
     }
     
-    bindToCamera ( camera ) {
+    hide () {
         
-        this.visible = false;
-        this.seen = false;
-        
-        camera.on( 'move', (viewport, scale) => {
-            
-            var visible = this.intersectsRect( viewport );
-            
-            if ( visible ) {
-                
-                if( !this.visible ) {
-                    
-                    this.visible = true;
-                    this.emit( 'viewEnter', viewport, scale );
-                    
-                }
-                
-                this.emit( 'viewChange', viewport, scale );
-                
-            } else if( !visible && this.visible ) {
-                
-                this.visible = false;
-                this.emit( 'viewLeave', viewport, scale );
-                
-            }
-            
-        });
+        this.element.style.display = 'none';
         
     }
     
-    containsPoint () { return false }
-    
-    intersectsRect() { return false }
+    show () {
+        
+        this.element.style.display = 'block';
+        
+    }
     
 };

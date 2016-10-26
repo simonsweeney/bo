@@ -1,5 +1,5 @@
 var Vector2 = require('./vendor/vector2.js');
-var Matrix = require('transformation-matrix-js').Matrix;
+var Box2 = require('./vendor/box2.js');
 var { PREFIXED_TRANSFORM } = require('./lib/utils.js');
 
 var types = {
@@ -9,22 +9,23 @@ var types = {
     Text: require('./types/text.js'),
     Image: require('./types/image.js'),
     Song: require('./types/song.js'),
-    Sprite: require('./types/sprite.js'),
-    Character: require('./types/character.js')
+    Sprite: require('./types/sprite.js')
 }
-
-var matrix = new Matrix();
-var SCALE = new Vector2( 1, .5 );
 
 module.exports = class World {
     
     constructor ( config, context ) {
         
+        this.position = new Vector2();
+        
+        this.box = new Box2(
+            this.position,
+            new Vector2( config.attrs.width, config.attrs.height )
+        )
+        
         this.element = context.worldElement;
         this.children = this.create( config.children, context );
         
-        this.center = new Vector2();
-
         //this.regions.forEach( region => this.element.appendChild(region.element) );
         
     }
@@ -42,6 +43,20 @@ module.exports = class World {
             return instance;
             
         });
+        
+    }
+    
+    each( fn ) {
+        
+        var walk = ( item, i ) => {
+            
+            fn( item, i );
+            
+            item.children.forEach( walk );
+            
+        }
+        
+        this.children.forEach( walk );
         
     }
     

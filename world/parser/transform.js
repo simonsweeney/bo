@@ -7,6 +7,8 @@ module.exports = [
     
     world => {
         
+        world.attrs.width = world.attrs.height = config.TILE_SIZE * config.WORLD_SIZE;
+        
         var convertMetrics = parent => {
                     
             parent.children.forEach( (child, i) => {
@@ -52,6 +54,8 @@ module.exports = [
         
         var imgs = [];
         
+        var destRoot = config.ASSET_PATH + config.RESIZED_DIR;
+        
         find( world, 'Image' ).forEach( image => {
             
             var src = image.attrs.src;
@@ -67,15 +71,13 @@ module.exports = [
             
             var srcs = [];
             
-            var destRoot = config.ASSET_PATH + config.RESIZED_DIR;
-            
             for( var i = 1; i <= config.ZOOM_LEVELS; i++ ) {
                 
-                var dest = destRoot + [ filename, width, height ].join('_') + '.' + extension;
+                var dest = [ filename, width, height ].join('_') + '.' + extension;
                 
                 if( !imgs.find( img => img.dest === dest ) ) imgs.push({ width, height, src, dest });
                 
-                srcs.push( dest );
+                srcs.push( destRoot + dest );
                 
                 width = Math.round( width / 2 );
                 height = Math.round( height / 2 );
@@ -88,15 +90,19 @@ module.exports = [
             
         })
         
+        var existingFiles = fs.readdirSync( destRoot );
+        
         imgs.forEach( def => {
             
-            // sharp(def.src)
-            //     .resize(def.width, def.height)
-            //     .toFile(def.dest, err => {
+            if( existingFiles.indexOf(def.dest) >= -1 ) return;
+            
+            sharp(def.src)
+                .resize(def.width, def.height)
+                .toFile(destRoot + def.dest, err => {
                     
-            //         if (!err) console.log( 'Resized ' + def.dest );
+                    if (!err) console.log( 'Resized ' + def.dest );
                     
-            //     });
+                });
             
         })
         
