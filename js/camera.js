@@ -189,6 +189,7 @@ module.exports = class Camera extends EventEmitter {
             if( this.viewport.intersectsBox( object.viewBox ) ) {
                 
                 object.show();
+                object.update(this);
                 object.children.forEach( renderObject );
                 
             } else {

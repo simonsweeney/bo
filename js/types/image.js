@@ -12,7 +12,7 @@ module.exports = class Image extends Rect {
     
     getName () { return 'image' }
     
-    onCameraMove ( camera ) {
+    update ( camera ) {
         
         this.element.style.backgroundImage = this.srcs[ this.srcs.length - 1 ];
         

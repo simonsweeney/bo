@@ -19,6 +19,7 @@ module.exports = class Thing extends EventEmitter {
         
         this.children = [];
         this.element = this.createElement( attrs );
+        this.visible = false;
         
         if( this.element ) {
             
@@ -128,5 +129,7 @@ module.exports = class Thing extends EventEmitter {
         this.element.style.display = 'block';
         
     }
+    
+    update () {}
     
 };
