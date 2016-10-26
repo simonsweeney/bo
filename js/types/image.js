@@ -14,7 +14,7 @@ module.exports = class Image extends Rect {
     
     update ( camera ) {
         
-        this.element.style.backgroundImage = this.srcs[ this.srcs.length - 1 ];
+        this.element.style.backgroundImage = 'url(' + this.srcs[ this.srcs.length - 1 ] + ')';
         
     }
     

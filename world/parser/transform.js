@@ -94,7 +94,7 @@ module.exports = [
         
         imgs.forEach( def => {
             
-            if( existingFiles.indexOf(def.dest) >= -1 ) return;
+            if( existingFiles.indexOf(def.dest) > -1 ) return;
             
             sharp(def.src)
                 .resize(def.width, def.height)
