@@ -23,6 +23,7 @@ module.exports = class Camera extends EventEmitter {
         this.center = new Vector2();
         this.viewport = new Box2();
         this.scale = 1;
+        this.scaleLinear = 1;
 
         window.addEventListener( 'resize', this.setSize.bind(this) );
         
@@ -35,8 +36,6 @@ module.exports = class Camera extends EventEmitter {
         var size = v1.set( window.innerWidth / this.scale, window.innerHeight / this.scale );
         this.viewport.setFromCenterAndSize( this.center, size );
         
-        this.style();
-        
     }
     
     setCenter ( v ) {
@@ -45,9 +44,7 @@ module.exports = class Camera extends EventEmitter {
         
         this.center.copy( v );
         
-        this.viewport.translate( v );
-        
-        this.style();
+        this.viewport.translate( d );
         
     }
     
@@ -64,12 +61,12 @@ module.exports = class Camera extends EventEmitter {
         
     }
     
-    style () {
+    zoomBy ( amt ) {
         
-        var x = -this.viewport.min.x * this.scale;
-        var y = -this.viewport.min.y * this.scale;
+        this.scaleLinear -= amt;
+        this.scaleLinear = Math.max( Math.min( this.scaleLinear, 1.5 ), 0.25 );
         
-        this.element.style[ PREFIXED_TRANSFORM ] = `translate(${x}px, ${y}px) scale(${this.scale})`;
+        this.setScale( Math.pow(this.scaleLinear, 3) );
         
     }
     
@@ -89,9 +86,15 @@ module.exports = class Camera extends EventEmitter {
         
     }
     
+    screenToView ( v ) {
+        
+        return v.clone().multiplyScalar(this.scale).add( this.viewport.min );
+        
+    }
+    
     screenToWorld ( v ) {
         
-        return v.clone()
+        return this.viewToWorld( this.screenToView( v ) );
         
     }
     
@@ -148,7 +151,12 @@ module.exports = class Camera extends EventEmitter {
             
         }
         
-        world.regions.forEach( renderObject );
+        var x = -this.viewport.min.x * this.scale;
+        var y = -this.viewport.min.y * this.scale;
+        
+        this.element.style[ PREFIXED_TRANSFORM ] = `translate(${x}px, ${y}px) scale(${this.scale})`;
+        
+        renderObject( world );
         
     }
     

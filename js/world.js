@@ -21,7 +21,7 @@ module.exports = class World {
     constructor ( config, context ) {
         
         this.element = context.worldElement;
-        this.regions = this.create( config.children, context );
+        this.children = this.create( config.children, context );
         
         this.center = new Vector2();
 
@@ -49,7 +49,9 @@ module.exports = class World {
         
         if( typeof fn === 'string' ) {
             
-            fn = x => x === fn;
+            var type = fn.toLowerCase();
+            
+            fn = x => x.getName().toLowerCase() === type;
             
         }
         
@@ -63,7 +65,7 @@ module.exports = class World {
             
         }
         
-        return this.regions.reduce( reducer, [] );
+        return this.children.reduce( reducer, [] );
         
     }
     
