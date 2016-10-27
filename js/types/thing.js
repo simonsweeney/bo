@@ -10,7 +10,7 @@ module.exports = class Thing extends EventEmitter {
         
         super();
         
-        attrs = extend( {}, this.getDefaults(), attrs );
+        this.attrs = extend( {}, this.getDefaults(), attrs );
 
         this.position = new Vector2( attrs.x, attrs.y );
         this.size = new Vector2( attrs.width, attrs.height );
@@ -25,7 +25,6 @@ module.exports = class Thing extends EventEmitter {
             
             this.setStyle( attrs );
             this.positionNeedsUpdate = true;
-            this.hide();
             context.worldElement.appendChild( this.element );
             
         }
@@ -42,17 +41,17 @@ module.exports = class Thing extends EventEmitter {
         
     }
     
-    createElement ( attrs ) {
+    createElement ( attrs, tagName ) {
         
-        var div = document.createElement('div');
-        div.style.width = attrs.width + 'px';
-        div.style.height = attrs.height + 'px';
+        var element = document.createElement( tagName || 'div' );
+        element.style.width = attrs.width + 'px';
+        element.style.height = attrs.height + 'px';
         
         var classes = attrs.classes || [];
         
-        div.classList.add( 'thing', 'thing_' + this.getName(), ...classes );
+        element.classList.add( 'thing', 'thing_' + this.getName(), ...classes );
         
-        return div;
+        return element;
         
     }
     
@@ -75,11 +74,11 @@ module.exports = class Thing extends EventEmitter {
         
     }
     
-    getTransform() {
+    // getTransform() {
         
-        return `translate(${this.position.x}px, ${this.position.y}px)`;
+    //     return `translate3d(${this.position.x}px, ${this.position.y}px)`;
         
-    }
+    // }
     
     addChildren ( children ) {
         
@@ -118,15 +117,31 @@ module.exports = class Thing extends EventEmitter {
         
     }
     
+    updatePosition ( camera ) {
+        
+        var {x, y} = this.position;
+        
+        this.element.style[ PREFIXED_TRANSFORM ] = `translate(${x}px, ${y}px)`;
+        
+        this.viewBox = camera.worldToViewBox( this.box );
+        
+    }
+    
     hide () {
         
+        if(!this.visible) return;
+        
         this.element.style.display = 'none';
+        this.visible = false;
         
     }
     
     show () {
         
+        if(this.visible) return;
+        
         this.element.style.display = 'block';
+        this.visible = true;
         
     }
     

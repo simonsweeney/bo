@@ -13,7 +13,7 @@ var cameraElement = document.querySelector('.camera');
 var worldElement = document.querySelector('.world');
 var spriteElement = document.querySelector('.sprites');
 
-var character = new Character( spriteElement );
+var character = new Character( worldElement, spriteElement );
 var camera = new Camera( cameraElement );
 
 var context = {
@@ -40,9 +40,9 @@ window.addEventListener('click', e => {
 
 });
 
-$(window).on('mousewheel', e => {
+window.addEventListener('mousewheel', e => {
     
-    camera.zoomBy( -e.deltaY * e.deltaFactor * .0001 );
+    camera.zoomBy( e.deltaY * .0001 );
     
 })
 

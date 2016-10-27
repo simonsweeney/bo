@@ -1,0 +1,14 @@
+.character{
+    
+    $character-width: 2.5em;
+    $character-height: 2.5em;
+    
+    width: $character-width;
+    height: $character-height;
+    background: coral;
+    position: absolute;
+    margin: -$character-height 0 0 (-$character-width/2);
+    z-index: 20;
+    border-radius: 50%;
+    
+}

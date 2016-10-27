@@ -3,7 +3,7 @@ var tween = require('./lib/tween.js');
 
 module.exports = class Character extends Sprite {
     
-    constructor ( element ) {
+    constructor ( worldElement, spriteElement ) {
         
         var attrs = {
             x: 0,
@@ -13,7 +13,7 @@ module.exports = class Character extends Sprite {
             color: 'coral'
         }
         
-        super( attrs, { spriteElement: element } );
+        super( attrs, { worldElement, spriteElement } );
         
     }
     

@@ -1,5 +1,13 @@
 <world>
     
+    <region color="blue">
+        
+        <panel x="0" y="0" width="100" height="600" color="red" direction="left"></panel>
+        
+        <theater x="15" y="5" width="700" src="//www.youtube.com/embed/_M916FeZ4QI" direction="right"></theater>
+        
+    </region>
+    
     <region color="silver">
         
         <rect color="blue" x="20" y="20" width="60" height="60">
@@ -146,6 +154,5 @@
     <region color="white"></region>
     <region color="white"></region>
     <region color="white"></region>
-    <region color="white"></region>
-    
+
 </world>

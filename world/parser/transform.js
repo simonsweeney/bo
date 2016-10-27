@@ -2,6 +2,9 @@ var config = require('./config.js');
 var find = require('./utils.js').find;
 var fs = require('fs');
 var sharp = require('sharp');
+var difference = require('underscore').difference;
+
+var SPRITE_TYPES = ['Sprite', 'Panel', 'Theater'];
 
 module.exports = [
     
@@ -21,14 +24,18 @@ module.exports = [
                 child.attrs.z = i;
                 
                 child.attrs.x = parent.attrs.x + (child.attrs.x / 100) * parent.attrs.width;
-                child.attrs.y = parent.attrs.y + (child.attrs.y / 100) * parent.attrs.height
+                child.attrs.y = parent.attrs.y + (child.attrs.y / 100) * parent.attrs.height;
                 
-                child.attrs.width = (child.attrs.width / 100) * parent.attrs.width;
+                if( SPRITE_TYPES.indexOf( child.type ) === -1 ) {
                 
-                if( child.attrs.height !== undefined ) {
-                    child.attrs.height = (child.attrs.height / 100) * parent.attrs.height;
-                } else {
-                    child.attrs.height = child.attrs.width;
+                    child.attrs.width = (child.attrs.width / 100) * parent.attrs.width;
+                
+                    if( child.attrs.height !== undefined ) {
+                        child.attrs.height = (child.attrs.height / 100) * parent.attrs.height;
+                    } else {
+                        child.attrs.height = child.attrs.width;
+                    }
+            
                 }
                 
                 convertMetrics( child );
@@ -92,6 +99,10 @@ module.exports = [
         
         var existingFiles = fs.readdirSync( destRoot );
         
+        difference( existingFiles, imgs.map(i => i.dest) ).forEach( file => {
+            fs.unlinkSync( destRoot + file )
+        })
+        
         imgs.forEach( def => {
             
             if( existingFiles.indexOf(def.dest) > -1 ) return;
@@ -104,7 +115,7 @@ module.exports = [
                     
                 });
             
-        })
+        });
         
     }
     

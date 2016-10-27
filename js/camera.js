@@ -59,7 +59,7 @@ module.exports = class Camera extends EventEmitter {
         
         var lerp = Math.max( (1 - this.scale) / (1 - this.minScale), 0 );
         
-        var center = this.focus.clone().lerp( this.viewCenter, Math.pow(lerp, 10) );
+        var center = this.focus.clone() //.lerp( this.viewCenter, Math.pow(lerp, 10) );
         
         var d = v1.copy( center ).sub( this.center );
         
@@ -156,35 +156,43 @@ module.exports = class Camera extends EventEmitter {
         var renderObject = object => {
             
             if( object.positionNeedsUpdate ) {
-                
-                if( object.isSprite ) {
-                    
-                    var {x, y} = this.worldToView( object.position );
-                    var hw = object.size.x / 2;
-                    var h = object.size.y;
-                    
-                    object.spriteElement.style[ PREFIXED_TRANSFORM ] = `translate(${x - hw}px, ${y - h}px)`;
-                    
-                    object.viewBox = new Box2(
-                        new Vector2( x - hw, y - h ),
-                        new Vector2( x + hw, y )
-                    )
-                    
-                    if( object.element ) object.viewBox.union( this.worldToViewBox(object.box) );
-                    
-                } else {
-                    
-                    var {x, y} = object.position;
-                    
-                    object.element.style[ PREFIXED_TRANSFORM ] = `translate(${x}px, ${y}px)`;
-                    
-                    object.viewBox = this.worldToViewBox( object.box );
-                
-                }
-                
+                object.updatePosition( this );
                 object.positionNeedsUpdate = false;
-            
             }
+                
+                
+                
+                // if( object.isSprite ) {
+                    
+                //     var {x, y} = this.worldToView( object.position );
+                //     var hw = object.size.x / 2;
+                //     var h = object.size.y;
+                    
+                //     object.spriteElement.style[ PREFIXED_TRANSFORM ] = `translate(${x - hw}px, ${y - h}px)`;
+                    
+                //     object.viewBox = new Box2(
+                //         new Vector2( x - hw, y - h ),
+                //         new Vector2( x + hw, y )
+                //     )
+                    
+                //     if( object.element ) object.viewBox.union( this.worldToViewBox(object.box) );
+                    
+                // } else {
+                    
+                //     if(object.element) {
+                    
+                //         var {x, y} = object.position;
+                    
+                //         object.element.style[ PREFIXED_TRANSFORM ] = `translate(${x}px, ${y}px)`;
+                    
+                //     }
+                    
+                //     object.viewBox = this.worldToViewBox( object.box );
+                
+                // }
+                
+                // object.positionNeedsUpdate = false;
+            
             
             if( this.viewport.intersectsBox( object.viewBox ) ) {
                 

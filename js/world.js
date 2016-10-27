@@ -9,7 +9,9 @@ var types = {
     Text: require('./types/text.js'),
     Image: require('./types/image.js'),
     Song: require('./types/song.js'),
-    Sprite: require('./types/sprite.js')
+    Sprite: require('./types/sprite.js'),
+    Panel: require('./types/panel.js'),
+    Theater: require('./types/theater.js')
 }
 
 module.exports = class World {

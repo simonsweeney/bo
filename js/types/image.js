@@ -7,14 +7,25 @@ module.exports = class Image extends Rect {
         super(attrs, elements);
         
         this.srcs = attrs.src;
+        this.src = '';
         
     }
     
     getName () { return 'image' }
     
+    createElement ( attrs ) {
+        
+        return super.createElement( attrs, 'img' );
+        
+    }
+    
     update ( camera ) {
         
-        this.element.style.backgroundImage = 'url(' + this.srcs[ this.srcs.length - 1 ] + ')';
+        if(this.src) return;
+        
+        this.src = this.srcs[ this.srcs.length - 1 ];
+        
+        this.element.src = this.src;
         
     }
     

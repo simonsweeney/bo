@@ -1,54 +1,8 @@
-body {
-  margin: 0;
-  background: black;
-  overflow: hidden;
-  font-family: 'Helvetica'; }
-
-h1 {
-  font-size: 300px; }
-
-.space {
-  position: fixed;
-  background-image: url("http://www.gunnars.com/wp-content/uploads/2014/08/Space.jpg");
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0; }
-
 .thing {
   position: absolute;
   top: 0;
   left: 0;
-  background-size: 100% 100%; }
-
-.camera {
-  position: fixed;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0; }
-
-.world {
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-  -webkit-transform: scale(1, 0.5) rotate(45deg);
-          transform: scale(1, 0.5) rotate(45deg); }
-
-.thing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-size: cover;
-  background-position: center center; }
-
-.region {
-  background-color: white;
-  overflow: hidden; }
-
-.ellipse {
-  border-radius: 50%; }
+  display: none; }
 
 .character {
   width: 2.5em;
@@ -59,33 +13,13 @@ h1 {
   z-index: 20;
   border-radius: 50%; }
 
-.button-1 {
-  background: red;
-  -webkit-transition: background-color 1s;
-  transition: background-color 1s; }
-  .button-1.button_active {
-    background-color: yellow; }
-
-.spinner div {
-  position: absolute;
-  top: 50%;
-  left: 50%; }
-
-.spinner.line div {
+.sprite_panel iframe {
   width: 100%;
-  height: 10%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%; }
+  height: 100%; }
 
-.spinner.circle div {
-  width: 20%;
-  height: 20%;
-  border-radius: 50%;
-  left: 80%;
-  -webkit-transform-origin: -150% 50%;
-          transform-origin: -150% 50%; }
+.thing_sprite-shadow {
+  background: black;
+  z-index: 10; }
 
 .song__inner {
   border-radius: 50%;
@@ -200,6 +134,79 @@ h1 {
 
 .song_playing .song__title {
   color: coral; }
+
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: 'Helvetica'; }
+
+h1 {
+  font-size: 300px; }
+
+.space {
+  position: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0; }
+
+.camera {
+  position: fixed;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0; }
+
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: scale(1, 0.5) rotate(45deg);
+          transform: scale(1, 0.5) rotate(45deg); }
+
+.thing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center; }
+
+.region {
+  background-color: white;
+  overflow: hidden; }
+
+.ellipse {
+  border-radius: 50%; }
+
+.button-1 {
+  background: red;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s; }
+  .button-1.button_active {
+    background-color: yellow; }
+
+.spinner div {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
+.spinner.line div {
+  width: 100%;
+  height: 10%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%; }
+
+.spinner.circle div {
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  left: 80%;
+  -webkit-transform-origin: -150% 50%;
+          transform-origin: -150% 50%; }
 
 .sprite {
   position: absolute;

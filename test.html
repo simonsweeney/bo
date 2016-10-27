@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{margin:0;}
+    </style>
+</head>
+<body>
+    
+    <canvas id="c"></canvas>
+    
+    <script type="text/javascript">
+        
+        var canvas = document.getElementById('c');
+        var ctx = canvas.getContext('2d');
+        var img = new Image();
+        img.src = '/assets/312B55CFDC924723.jpg';
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        var size = 800;
+        
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        
+        var a = Math.PI/4;
+        
+        var manX = 60;
+        var manY = 60;
+        
+        var cameraX = 0;
+        var cameraY = 0;
+        
+        function drawMan( color ){
+            ctx.fillStyle = color;
+            ctx.fillRect(-5, -20, 10, 20);
+        }
+        
+        function drawWorld(){
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(-size/2, -size/2, size, size);
+        }
+        
+        function drawOrigin(){
+            ctx.save();
+            ctx.moveTo(0, -h/2);
+            ctx.lineTo(0, h/2);
+            ctx.moveTo(-w/2, 0);
+            ctx.lineTo(w/2, 0);
+            ctx.stroke();
+            ctx.restore();
+        }
+        
+        setInterval( () => {
+            
+            ctx.save();
+            
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
+                
+                ctx.translate( -cameraX, -cameraY )
+                
+                //ctx.scale(1, .5);
+                
+                ctx.translate( manX, manY )
+                
+                ctx.rotate(a);
+                
+                ctx.translate( -manX, -manY )
+                
+                drawWorld();
+                
+                // ctx.save();
+                
+                //     ctx.translate(manX, manY);
+                //     ctx.rotate(-a + Math.PI/4);
+                //     ctx.scale(1, 2);
+                //     drawMan('black');
+                    
+                // ctx.restore();
+                
+                ctx.translate(manX, manY);
+                ctx.rotate(-a);
+                //ctx.scale(1, 2);
+                
+                drawMan('red');
+            
+            ctx.restore();
+            
+            ctx.save();
+            
+                ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
+                drawOrigin();
+            
+            ctx.restore();
+            
+            // var cx = 0;
+            // var cy = 0;
+            
+            // var offsetX = 40;
+            // var offsetY = 20;
+            
+            // ctx.translate(offsetX, offsetY);
+            // ctx.scale(1, .5);
+            // ctx.rotate(a);
+            // ctx.fillStyle = 'red';
+            // ctx.fillRect(-5, -5, 10, 10);
+            // ctx.translate(-cx, -cy);
+            // ctx.fillStyle = 'black';
+            // ctx.strokeRect(-size/2, -size/2, size, size);
+
+            //a += 0.01;
+            
+            // 
+            
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // ctx.save();
+            // ctx.translate(window.innerWidth/2, window.innerHeight/2)
+            // ctx.scale( .5, .25 );
+            // ctx.rotate(a);
+            // ctx.drawImage( img, 0, 0 );
+            // ctx.restore();
+            // a += 0.01;
+            
+        }, 16)
+        
+        // window.addEventListener('mousemove', e => {
+        //     manX = e.clientX;
+        //     manY = e.clientY;
+        // })
+        
+    </script>
+    
+</body>
+</html>
